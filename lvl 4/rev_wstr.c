@@ -12,7 +12,7 @@
 
 #include <unistd.h>
 
-static int		print_last(const char *str, int len)
+static int		rev_wstr(const char *str, int len)
 {
 	int				i;
 
@@ -40,7 +40,7 @@ int				main(int argc, char **argv)
 			len++;
 		len--;
 		while (len > 0)
-			len = print_last(argv[1], len);
+			len = rev_wstr(argv[1], len);
 	}
 	write(1, "\n", 1);
 	return (0);
