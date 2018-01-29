@@ -6,7 +6,7 @@
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:09 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/01/26 12:48:33 by mbortnic         ###   ########.fr       */
+/*   Updated: 2018/01/27 11:18:03 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,16 @@ int			main(int argc, char *argv[])
 	}
 	return (0);
 }
+
+/*
+ $> ./brackets '(johndoe)' | cat -e
+OK$
+$> ./brackets '([)]' | cat -e
+Error$
+$> ./brackets '' '{[(0 + 0)(1 + 1)](3*(-1)){()}}' | cat -e
+OK$
+OK$
+$> ./brackets | cat -e
+$
+$>
+ */

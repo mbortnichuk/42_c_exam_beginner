@@ -1,53 +1,38 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/17 12:50:32 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/01/18 19:13:44 by mbortnic         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <stdio.h>
-#include "ft_list_size.h"
 
-void	ft_putchar(char c)
+int			*ft_range(int start, int end)
 {
-	write(1, &c, 1);
-}
+	int			*range;
+	int			i;
 
-int		ft_atoi(char *str)
-{
-	int i;
-	int neg;
-	int res;
-
+	if (start > end)
+		range = (int*)malloc(sizeof(int) * (start - end));
+	else
+		range = (int*)malloc(sizeof(int) * (end - start + 1));
 	i = 0;
-	neg = 1;
-	res = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] '\r' || \
-			str[i] ==)
+	while (start != end)
+	{
+		range[i++] = start;
+		start += (start > end) ? -1 : 1;
+	}
+	range[i] = start;
+	return (range);
 }
 
-void	ft_px(size_t nb)
+#include <stdio.h>
+int		 main()
 {
-	char *str;
-
-	str = "0123456789abcdef";
-	if (nb >= 16)
-		ft_px(nb / 16);
-	ft_putchar(str[nb % 16]);
-}
-
-int main(int ac, char **av)
-{
-	if (ac == 2)
-		ft_px(atoi(av[1]));
-	ft_putchar('\n');
+	int *numbers;
+	int i = 0;
+	int start = 2147483640;
+	int end = 2147483647;
+	int numrange;
+	if (end > start)
+		numrange = end - start;
+	else
+		numrange = start - end;
+	numbers = ft_range(start, end);
+	while (i <= numrange)
+		printf("%d |\n", numbers[i++]);
 	return (0);
 }
