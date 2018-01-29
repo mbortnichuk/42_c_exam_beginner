@@ -37,3 +37,10 @@ char	*ft_itoa_base(int value, int base)
 	ans[p] = '\0';
 	return (ans);
 }
+
+#include <stdio.h>
+int main(void)
+{
+	printf("%s\n", ft_itoa_base(5156454, 10));
+	return (0);
+}
