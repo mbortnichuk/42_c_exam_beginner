@@ -6,7 +6,7 @@
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 15:36:24 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/01/19 15:51:08 by mbortnic         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:50:30 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void	aux(int n, int b, char *ans, int *p)
 {
 	char	base[] = "0123456789ABCDEF";
-
 	if (n <= -b || b <= n)
 		aux(n / b, b, ans, p);
 	ans[(*p)++] = base[ABS(n % b)];
@@ -25,10 +24,10 @@ void	aux(int n, int b, char *ans, int *p)
 char	*ft_itoa_base(int value, int base)
 {
 	char	*ans;
-	int		p;
+	int p;
 
-	if (base < 2 || 16 < base
-		|| !(ans = (char *)malloc(sizeof(char) * 35)))
+	if (base < 2 || 16 < base || \
+			!(ans = (char *)malloc(sizeof(char) * 35)))
 		return (NULL);
 	p = 0;
 	if (base == 10 && value < 0)
@@ -41,6 +40,6 @@ char	*ft_itoa_base(int value, int base)
 #include <stdio.h>
 int main(void)
 {
-	printf("%s\n", ft_itoa_base(5156454, 10));
+	printf("%s\n", ft_itoa_base(8400, 8));
 	return (0);
 }
