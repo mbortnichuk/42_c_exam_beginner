@@ -1,33 +1,58 @@
-#include <stdlib.h>
-#define ABS(v) ((v) < 0 ? -(v) : (v))
+#include <unistd.h>
 
-void	aux(int n, int b, char *ans, int *p)
+char	*par(char *str, int way)
 {
-	char base[] = "0123456789ABCDEF";
-	if (n <= -b || b <= n)
-		aux(n / b, b, ans, p);
-	ans[(*p)++] = base[ABS(n % b)];
+	int s;
+
+	s = 0;
+	while (*str)
+	{
+		if (*str == '[')
+			s++;
+		else if (*str == ']')
+			s--;
+		if (s == 0)
+			return (str);
+		str += way;
+	}
+	return (NULL);
 }
 
-char	*ft_itoa_base(int value, int base)
+void	brainfuck(char *str, char *buf)
 {
-	char	*ans;
-	int		p;
-
-	if (base < 2 || 16 < base || \
-			!(ans = (char *)malloc(sizeof(char) * 35)))
-		return (NULL);
-	p = 0;
-	if (base == 10 && value < 0)
-		ans[p++] = '-';
-	aux(value, base, ans, &p);
-	ans[p] = '\0';
-	return (ans);
+	while (*str != '\0')
+	{
+		if (*str == '>')
+			buf++;
+		else if (*str == '<')
+			buf--;
+		else if (*str == '+')
+			(*buf)++;
+		else if (*str == '-')
+			(*buf)--;
+		else if (*str == '.')
+			write(1, buf, 1);
+		else if (*str == '[' && !(*buf))
+			str = par(str, 1);
+		else if (*str == ']' && (*buf))
+			str = par(str, -1);
+		str++;
+	}
 }
 
-#include <stdio.h>
-int main(void)
+int main(int ac, char **av)
 {
-	printf("%s\n", ft_itoa_base(8400, 16));
+	char buf[2048];
+	int a;
+
+	if (ac > 1)
+	{
+		a = 0;
+		while (a < 2048)
+			buf[a++] = 0;
+		brainfuck(av[1], buf);
+	}
+	else
+		write(1, "\n", 1);
 	return (0);
 }
