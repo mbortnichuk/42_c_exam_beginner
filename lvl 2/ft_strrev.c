@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_str.c                                       :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 11:40:16 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/01/30 17:32:41 by mbortnic         ###   ########.fr       */
+/*   Created: 2018/01/30 17:37:45 by mbortnic          #+#    #+#             */
+/*   Updated: 2018/01/30 17:37:49 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
 
-void	expand_str(char *s)
+char	*ft_strrev(char *str)
 {
 	int		i;
+	int		len;
+	char	tmp;
 
+	len = 0;
+	while (str[len] != '\0')
+		len++;
 	i = -1;
-	while (*s)
+	while (++i < --len)
 	{
-		while (*s && (*s == ' ' || *s == '\t' || *s == '\n'))
-			s++;
-		if (*s && i != -1)
-			write(1, "   ", 3);
-		i = 0;
-		while (s[i] && s[i] != ' ' && s[i] != '\t' && s[i] != '\n')
-			i++;
-		write(1, s, i);
-		s = s + i;
+		tmp = str[i];
+		str[i] = str[len];
+		str[len] = tmp;
 	}
+	return (str);
 }
 
-int		main(int argc, char **argv)
+int		main()
 {
-	if (argc == 2)
-	{
-		expand_str(argv[1]);
-	}
-	write(1, "\n", 1);
+	char str[] = "Hello World !";
+	printf("%s\n", ft_strrev(str));
 	return (0);
 }

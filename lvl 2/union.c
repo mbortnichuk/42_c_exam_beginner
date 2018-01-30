@@ -1,40 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paramsum.c                                         :+:      :+:    :+:   */
+/*   union.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 11:42:03 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/01/30 17:36:40 by mbortnic         ###   ########.fr       */
+/*   Created: 2018/01/30 17:38:59 by mbortnic          #+#    #+#             */
+/*   Updated: 2018/01/30 17:39:03 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putnbr(int nb)
+int		ft_verif_char(char *s, char c, int index)
 {
-	char c;
+	int		i;
 
-	if (nb > 9)
+	i = 0;
+	while (i < index)
 	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		if (s[i] == c)
+			return (0);
+		i++;
 	}
-	else
+	return (1);
+}
+
+void	ft_union(char *s1, char *s2)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	while (s1[i])
 	{
-		c = nb + '0';
-		write(1, &c, 1);
+		if (ft_verif_char(s1, s1[i], i) == 1)
+			write(1, &s1[i], 1);
+		i++;
+	}
+	len = i;
+	i = 0;
+	while (s2[i])
+	{
+		if (ft_verif_char(s2, s2[i], i) == 1)
+		{
+			if (ft_verif_char(s1, s2[i], len) == 1)
+				write(1, &s2[i], 1);
+		}
+		i++;
 	}
 }
 
 int		main(int argc, char **argv)
 {
-	int		param;
-	(void)argv;
-
-	param = argc - 1;
-	ft_putnbr(param);
+	if (argc == 3)
+		ft_union(argv[1], argv[2]);
 	write(1, "\n", 1);
 	return (0);
 }

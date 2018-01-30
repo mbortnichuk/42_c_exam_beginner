@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_str.c                                       :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 11:40:16 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/01/30 17:32:41 by mbortnic         ###   ########.fr       */
+/*   Created: 2018/01/30 17:38:33 by mbortnic          #+#    #+#             */
+/*   Updated: 2018/01/30 17:38:36 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
 
-void	expand_str(char *s)
+int		max(int* tab, unsigned int len)
 {
-	int		i;
+	unsigned int	i;
+	int 			max;
 
-	i = -1;
-	while (*s)
+	i = 0;
+	max = tab[0];
+	while (i < len)
 	{
-		while (*s && (*s == ' ' || *s == '\t' || *s == '\n'))
-			s++;
-		if (*s && i != -1)
-			write(1, "   ", 3);
-		i = 0;
-		while (s[i] && s[i] != ' ' && s[i] != '\t' && s[i] != '\n')
-			i++;
-		write(1, s, i);
-		s = s + i;
+		if (max < tab[i])
+			max = tab[i];
+		++i;
 	}
+	if (i == len)
+		return (max);
+	return (0);
 }
 
-int		main(int argc, char **argv)
+int		main()
 {
-	if (argc == 2)
-	{
-		expand_str(argv[1]);
-	}
-	write(1, "\n", 1);
-	return (0);
+	int array[10] = {1,2,3,4,5,6,7,8,9,10};
+	printf("%d \n", max(array, 10));
 }

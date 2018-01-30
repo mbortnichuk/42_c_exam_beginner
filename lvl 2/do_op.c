@@ -1,42 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_str.c                                       :+:      :+:    :+:   */
+/*   do_op.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 11:40:16 by mbortnic          #+#    #+#             */
-/*   Updated: 2018/01/30 17:32:41 by mbortnic         ###   ########.fr       */
+/*   Created: 2018/01/30 17:37:14 by mbortnic          #+#    #+#             */
+/*   Updated: 2018/01/30 17:37:19 by mbortnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-void	expand_str(char *s)
+void	do_op(char *nb1, char *op, char *nb2)
 {
-	int		i;
+	int n1;
+	int n2;
+	int r;
 
-	i = -1;
-	while (*s)
-	{
-		while (*s && (*s == ' ' || *s == '\t' || *s == '\n'))
-			s++;
-		if (*s && i != -1)
-			write(1, "   ", 3);
-		i = 0;
-		while (s[i] && s[i] != ' ' && s[i] != '\t' && s[i] != '\n')
-			i++;
-		write(1, s, i);
-		s = s + i;
-	}
+	n1 = atoi(nb1);
+	n2 = atoi(nb2);
+	r = 0;
+	if (op[0] == '+')
+		r = n1 + n2;
+	else if (op[0] == '-')
+		r = n1 - n2;
+	else if (op[0] == '*')
+		r = n1 * n2;
+	else if (op[0] == '/')
+		r = n1 / n2;
+	else if (op[0] == '%')
+		r = n1 % n2;
+	printf("%d\n", r);
 }
 
 int		main(int argc, char **argv)
 {
-	if (argc == 2)
+	if (argc == 4)
 	{
-		expand_str(argv[1]);
+		do_op(argv[1], argv[2], argv[3]);
 	}
-	write(1, "\n", 1);
+	else
+		printf("\n");
 	return (0);
 }
