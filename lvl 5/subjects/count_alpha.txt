@@ -1,4 +1,4 @@
-ssignment name  : count_alpha
+Assignment name  : count_alpha
 Expected files   : count_alpha.c
 Allowed functions: write, printf
 --------------------------------------------------------------------------------
