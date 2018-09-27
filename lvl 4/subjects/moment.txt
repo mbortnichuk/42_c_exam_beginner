@@ -1,0 +1,28 @@
+Assignment name  : moment
+Expected files   : moment.c
+Allowed functions: malloc, free
+--------------------------------------------------------------------------------
+
+Create a function that takes an unsigned int parameter, representing a
+potential duration in seconds, and returns a string that indicates the
+number of seconds / minutes / hours / days or months elapsed.
+We assume that the months are 30 days long and we do not know the leap years.
+
+The output format will be:
+
+xxx {second(s)|minute(s)|hour(s)|day(s)|month(s)} ago.
+
+Your function will only return the duration with the lowest possible value.
+The function will be prototyped as follows:
+
+ char    *moment(unsigned int duration)
+
+Examples:
+
+moment(0)       => 0 seconds ago.
+moment(1)       => 1 second ago.
+moment(30)      => 30 seconds ago.
+moment(65)      => 1 minute ago.
+moment(120)     => 2 minutes ago.
+moment(2400)    => 40 minutes ago.
+moment(3735)    => 1 hour ago.
