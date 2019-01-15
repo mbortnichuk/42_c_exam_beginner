@@ -1,0 +1,28 @@
+Assignment name: cycle_detector
+Expected files: cycle_detector.c
+Allowed functions: malloc, free
+-------------------------------------------------- ------------------------------
+
+Create a cycle_detector function that takes a "const t_list * list" in
+argument, which will verify that there is no cycle inside the chained list
+list.
+
+A cycle is defined when, during the course of the list, you spend at least 2
+times through the same link.
+
+This function will return 1 if the function detects a cycle, otherwise it will return 0.
+
+This function will be prototyped as follows:
+
+int cycle_detector (const t_list * list)
+
+The type "t_list" is defined as follows:
+
+typedef struct s_list
+{
+     int data;
+     struct s_list * next;
+} t_list;
+
+This type will be provided in the header "list.h". You do not need to provide it,
+we will use our in correction.
